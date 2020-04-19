@@ -1,5 +1,7 @@
 const Reading = require('../models/Reading')
 const WeatherStation = require('../models/WeatherStation')
+const Sequelize = require('sequelize');
+const op = Sequelize.Op;
 
 module.exports = {
     async create(req, res) {
@@ -62,7 +64,9 @@ module.exports = {
         const { page = 1 } = req.query;
         const { wh_id } = req.params
 
-        const { count } = await Reading.findAndCountAll()
+        const count = await Reading.count({
+            where: { wh_id: wh_id }
+        })
 
         const pages = Math.ceil(count / 20);
 
@@ -82,6 +86,32 @@ module.exports = {
             count: count,
             pages: pages
         })
+    },
+    async getByDate(req, res) {
+        const { wh_id } = req.params
+        const { startDate, endDate } = req.query
+        const weatherStation = await WeatherStation.findByPk(wh_id)
+
+        if (!weatherStation) {
+            return res.status(400).json({ error: 'WeatherStation not found' })
+        }
+        const readings = await Reading.findAll({
+            raw: true,
+            where: {
+                wh_id: wh_id,
+                created_at: {
+                    [op.between]: [startDate, endDate]
+                }
+            },
+            order: [
+                ['created_at', 'DESC']
+            ],
+
+        })
+
+        return res.json(readings)
+
     }
+
 
 }

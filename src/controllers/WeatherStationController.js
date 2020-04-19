@@ -70,15 +70,13 @@ module.exports = {
     async update(req, res) {
 
         const { id } = req.params
-
-        console.log(id)
-
         const {
+            name,
             address,
             description
         } = req.body
 
-        const weatherStation = await WeatherStation.findByPk(id)
+        let weatherStation = await WeatherStation.findByPk(id)
 
 
         if (!weatherStation) {
@@ -86,11 +84,14 @@ module.exports = {
         }
 
         const weatherStationUpdated = await WeatherStation.update({
+            name,
             address,
             description
         }, { where: { id } })
 
-        return res.json(weatherStationUpdated)
+        weatherStation = await WeatherStation.findByPk(id)
+        console.log(weatherStation)
+        return res.json(weatherStation)
     }
 
 }

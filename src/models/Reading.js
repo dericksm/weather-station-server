@@ -13,7 +13,7 @@ class Reading extends Model {
             rainning_pulses: DataTypes.INTEGER,
             time_without_rainning: DataTypes.INTEGER,
             wind_direction: DataTypes.INTEGER,
-            speed: DataTypes.INTEGER,
+            speed: DataTypes.INTEGER
         }, {
             sequelize
         })

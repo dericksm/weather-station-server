@@ -19,6 +19,7 @@ routes.put('/weatherStation/update/:id', WeatherStationController.update)
 
 //Reading routes
 routes.get('/readings/:wh_id', ReadingsController.getAll)
+routes.get('/readings/date/:wh_id', ReadingsController.getByDate)
 routes.post('/readings/:wh_id', ReadingsController.create)
 
 module.exports = routes

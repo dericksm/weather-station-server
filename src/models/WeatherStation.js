@@ -9,6 +9,7 @@ class WeatherStation extends Model {
                 autoIncrement: false,
                 field: "id"
             },
+            name: DataTypes.STRING,
             address: DataTypes.STRING,
             description: DataTypes.STRING,
             date_day: DataTypes.INTEGER,
