@@ -27,7 +27,16 @@ module.exports = {
             return res.status(400).json({ error: 'WeatherStation not found' })
         }
 
+
+        let full_date
+        if (date_day != null && date_month != null && date_year != null && date_hours != null && date_minutes != null) {
+            full_date = new Date(`${date_month}-${date_day}-${date_year} ${date_hours}:${date_minutes}:00`)
+        } else {
+            full_date = null
+        }
+
         await WeatherStation.update({
+            full_date,
             date_day,
             date_month,
             date_year,
@@ -43,6 +52,7 @@ module.exports = {
 
         const reading = await Reading.create({
             wh_id,
+            full_date,
             date_day,
             date_month,
             date_year,
@@ -55,8 +65,6 @@ module.exports = {
             wind_direction,
             speed
         })
-
-
 
         return res.json(reading)
     },
@@ -75,7 +83,7 @@ module.exports = {
                 wh_id: wh_id
             },
             order: [
-                ['created_at', 'DESC']
+                ['full_date', 'DESC']
             ],
             limit: 20,
             offset: ((page - 1) * 20),

@@ -21,6 +21,10 @@ module.exports = {
                 type: Sequelize.STRING,
                 allowNull: true
             },
+            full_date: {
+                type: Sequelize.DATE,
+                allowNull: true
+            },
             date_day: {
                 type: Sequelize.INTEGER,
                 allowNull: true

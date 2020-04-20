@@ -12,6 +12,7 @@ class WeatherStation extends Model {
             name: DataTypes.STRING,
             address: DataTypes.STRING,
             description: DataTypes.STRING,
+            full_date: DataTypes.DATE,
             date_day: DataTypes.INTEGER,
             date_month: DataTypes.INTEGER,
             date_year: DataTypes.INTEGER,

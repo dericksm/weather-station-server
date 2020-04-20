@@ -63,7 +63,11 @@ module.exports = {
             time_without_rainning,
             wind_direction,
             speed
-        }, { where: { id } })
+        }, { 
+            where: { id },
+            order: [
+                ['id', 'ASC']
+            ], })
 
         return res.json(weatherStationUpdated)
     },

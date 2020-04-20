@@ -3,6 +3,7 @@ const { Model, DataTypes } = require('sequelize')
 class Reading extends Model {
     static init(sequelize) {
         super.init({
+            full_date: DataTypes.DATE,
             date_day: DataTypes.INTEGER,
             date_month: DataTypes.INTEGER,
             date_year: DataTypes.INTEGER,

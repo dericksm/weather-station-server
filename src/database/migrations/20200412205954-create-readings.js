@@ -16,6 +16,10 @@ module.exports = {
                 onUpdate: 'CASCADE',
                 onDelete: 'CASCADE',
             },
+            full_date: {
+                type: Sequelize.DATE,
+                allowNull: true
+            },
             date_day: {
                 type: Sequelize.INTEGER,
                 allowNull: true
